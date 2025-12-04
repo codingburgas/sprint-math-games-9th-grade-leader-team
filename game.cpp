@@ -1,20 +1,20 @@
 #include <iostream>
 #include <string>
-#include <clocale>    // для setlocale
+#include <clocale>    
 #ifdef _WIN32
-#include <windows.h>  // для SetConsoleCP / SetConsoleOutputCP
+#include <windows.h> 
 #endif
 
 using namespace std;
 
 int main() {
-    // Для Windows: установить кодовую страницу UTF-8 в консоли (если нужно)
+  
     #ifdef _WIN32
     SetConsoleCP(65001);
     SetConsoleOutputCP(65001);
     #endif
 
-    // Настройка локали (для корректной обработки кириллицы)
+ 
     setlocale(LC_ALL, "");
 
     int score = 0;
