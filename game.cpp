@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <random>
 #include <ctime>
+#include <iomanip>
 
 using namespace std;
 
@@ -14,13 +15,12 @@ struct Question {
     int correct;
 };
 
-// -------------------- INPUT FIX --------------------
+//INPUT FIX
 void clearInput() {
     cin.clear();
     cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 }
 
-// Безопасный ввод чисел (только диапазон)
 int safeInputInt(int minVal, int maxVal) {
     int x;
     while (true) {
@@ -35,39 +35,34 @@ int safeInputInt(int minVal, int maxVal) {
         clearInput();
     }
 }
-// ---------------------------------------------------
 
-// -------------------- QUIZ FUNCTION ----------------
+//QUIZ FUNCTION
 void startQuiz(vector<Question> quiz) {
-    // Перемешивание вопросов
     shuffle(quiz.begin(), quiz.end(), default_random_engine(time(nullptr)));
 
     int score = 0;
     int answer;
 
-    for (int i = 0; i < quiz.size(); i++) {
+    for (int i = 0; i < (int)quiz.size(); i++) {
 
         cout << "\n-------------------------\n";
         cout << "Question " << i + 1 << "/" << quiz.size() << "\n";
         cout << quiz[i].text << "\n";
 
-        // вывод вариантов
         for (auto& ans : quiz[i].answers)
             cout << ans << "\n";
 
-        // проверка корректности ввода
         while (true) {
             cout << "Your answer: ";
             cin >> answer;
 
-            if (!cin.fail() && answer >= 1 && answer <= quiz[i].answers.size())
+            if (!cin.fail() && answer >= 1 && answer <= (int)quiz[i].answers.size())
                 break;
 
             cout << "Invalid input! Try again.\n";
             clearInput();
         }
 
-        // проверка правильности
         if (answer == quiz[i].correct) {
             cout << "\033[32mCorrect!\033[0m\n";
             score++;
@@ -78,17 +73,27 @@ void startQuiz(vector<Question> quiz) {
         }
     }
 
-    // финальный результат
     cout << "\n=========================\n";
     cout << "Final score: " << score << "/" << quiz.size() << endl;
 
-    if (score == quiz.size()) cout << "Excellent! Perfect score!\n";
-    else if (score > quiz.size() / 2) cout << "Good job!\n";
+    if (score == (int)quiz.size()) cout << "Excellent! Perfect score!\n";
+    else if (score > (int)quiz.size() / 2) cout << "Good job!\n";
     else cout << "Keep learning! You can do better.\n";
-}
-// ---------------------------------------------------
 
-// ----------------------- MENU ----------------------
+    //Accuracy + Progress Bar + Color
+    double accuracy = (double)score / quiz.size() * 100.0;
+
+    // Set color
+    string color;
+    if (accuracy < 50.0)
+        color = "\033[31m";  // red
+    else if (accuracy < 80.0)
+        color = "\033[33m";  // yellow
+    else
+        color = "\033[32m";  // green
+
+}
+//MENU
 void menu() {
     vector<Question> quiz = {
         {"What is the capital of Bulgaria?",
@@ -148,7 +153,6 @@ void menu() {
         }
     }
 }
-// ---------------------------------------------------
 
 int main() {
     menu();
