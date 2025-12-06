@@ -1,0 +1,9 @@
+﻿C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.CppBuild.targets(1139,5): warning MSB8027: два или более файлов с именем game.cpp выводят результаты в одно и то же расположение. Это может стать причиной неверного результата сборки.  Включенные файлы — ..\..\game.cpp, Game.cpp.
+  game.cpp
+C:\Users\mychk\OneDrive\Рабочий стол\githup\sprint-math-games-9th-grade-leader-team\game.cpp(21,6): error C2084: функция "void clearInput(void)" уже имеет текст реализации
+      C:\Users\mychk\OneDrive\Рабочий стол\githup\sprint-math-games-9th-grade-leader-team\game.cpp(17,6):
+      см. предыдущее определение "clearInput"
+  
+C:\Users\mychk\OneDrive\Рабочий стол\githup\sprint-math-games-9th-grade-leader-team\game.cpp(45,65): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Game.cpp
+  Создание кода...
