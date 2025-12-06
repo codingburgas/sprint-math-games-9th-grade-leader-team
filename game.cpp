@@ -1,65 +1,59 @@
 #include <iostream>
+#include <vector>
 #include <string>
-#include <clocale>    
-#ifdef _WIN32
-#include <windows.h> 
-#endif
 
 using namespace std;
 
-int main() {
-  
-    #ifdef _WIN32
-    SetConsoleCP(65001);
-    SetConsoleOutputCP(65001);
-    #endif
+struct Question {
+    string text;
+    vector<string> answers;
+    int correct;
+};
 
- 
-    setlocale(LC_ALL, "");
+int main() {
+    vector<Question> quiz = {
+        {
+            "What is the capital of Bulgaria?",
+            {"1) Plovdiv", "2) Sofia", "3) Varna"},
+            2
+        },
+        {
+            "In which year did Bulgaria join the EU?",
+            {"1) 2007", "2) 2004", "3) 2012"},
+            1
+        },
+        {
+            "What is the highest peak in Bulgaria?",
+            {"1) Musala", "2) Cherni Vrah", "3) Vihren"},
+            1
+        },
+        {
+            "Which city is known as the Sea Capital of Bulgaria?",
+            {"1) Burgas", "2) Varna", "3) Sozopol"},
+            2
+        },
+        {
+            "Who wrote the novel 'Under the Yoke'?",
+            {"1) Ivan Vazov", "2) Hristo Botev", "3) Elin Pelin"},
+            1
+        },
+        {
+            "Which river is the longest in Bulgaria?",
+            {"1) Danube", "2) Maritsa", "3) Iskar"},
+            3
+        }
+    };
 
     int score = 0;
-    int answer;
+    int a;
 
-    cout << "=============================\n";
-    cout << "     Викторина по програмиране\n";
-    cout << "           Игра на C++\n";
-    cout << "=============================\n\n";
+    for (int i = 0; i < quiz.size(); i++) {
+        cout << quiz[i].text << "\n";
+        for (auto& ans : quiz[i].answers) cout << ans << "\n";
+        cin >> a;
+        if (a == quiz[i].correct) score++;
+    }
 
-    cout << "Въпрос 1: Кой тип данни се използва за цели числа в C++?\n";
-    cout << "1) float\n";
-    cout << "2) int\n";
-    cout << "3) char\n";
-    cout << "Вашият отговор: ";
-    cin >> answer;
-    if (answer == 2) score++;
-
-    cout << "\nВъпрос 2: Кой оператор се използва за извеждане на текст в конзолата?\n";
-    cout << "1) cout <<\n";
-    cout << "2) cin >>\n";
-    cout << "3) print()\n";
-    cout << "Вашият отговор: ";
-    cin >> answer;
-    if (answer == 1) score++;
-
-    cout << "\nВъпрос 3: Как се нарича структура от инструкции, която се изпълнява при извикване?\n";
-    cout << "1) Променлива\n";
-    cout << "2) Клас\n";
-    cout << "3) Функция\n";
-    cout << "Вашият отговор: ";
-    cin >> answer;
-    if (answer == 3) score++;
-
-    cout << "\nВъпрос 4: Какво означава операторът == в C++?\n";
-    cout << "1) Присвояване на стойност\n";
-    cout << "2) Сравнение за равенство\n";
-    cout << "3) Спиране на програмата\n";
-    cout << "Вашият отговор: ";
-    cin >> answer;
-    if (answer == 2) score++;
-
-    cout << "=============================\n";
-    cout << "Вашият резултат: " << score << " от 4\n";
-    cout << "=============================\n";
-
+    cout << "Score: " << score << "/" << quiz.size() << endl;
     return 0;
 }
